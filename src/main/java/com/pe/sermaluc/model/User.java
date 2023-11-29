@@ -1,4 +1,4 @@
-package com.pe.sermaluc.bean;
+package com.pe.sermaluc.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

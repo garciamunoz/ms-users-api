@@ -1,6 +1,6 @@
 package com.pe.sermaluc.business;
 
-import com.pe.sermaluc.bean.User;
+import com.pe.sermaluc.model.User;
 import com.pe.sermaluc.dao.UsuarioDAO;
 import com.pe.sermaluc.dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
