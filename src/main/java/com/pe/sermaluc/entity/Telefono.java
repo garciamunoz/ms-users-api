@@ -21,4 +21,7 @@ public class Telefono implements Serializable {
     private String cityCode;
     @Column(name = "phonenumber")
     private String number;
+    @ManyToOne
+    @JoinColumn(name="idUser", nullable=false)
+    private Usuario user;
 }
