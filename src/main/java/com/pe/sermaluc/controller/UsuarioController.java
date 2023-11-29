@@ -1,14 +1,14 @@
 package com.pe.sermaluc.controller;
 
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
+import com.google.gson.Gson;
 import com.pe.sermaluc.business.UsuarioService;
 import com.pe.sermaluc.dto.UsuarioDTO;
 import com.pe.sermaluc.model.User;
-import com.pe.sermaluc.util.PropertiesPlace;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.*;
@@ -26,14 +26,11 @@ public class UsuarioController {
     UsuarioService usuarioService;
 
     @PostMapping("create-user")
-    public UsuarioDTO createUser(@RequestBody User usuario) {
+    public ResponseEntity<UsuarioDTO> createUser(@RequestBody User usuario) {
 
         String token = getJWTToken(usuario.getName());
-        usuarioService.registrarUsuario(token,usuario);
-        UsuarioDTO user = new UsuarioDTO();
-        //8user.setCreated(username);
-        user.setToken(token);
-        return user;
+        UsuarioDTO user = usuarioService.registrarUsuario(token,usuario);
+        return ResponseEntity.ok().body(user);
 
     }
 
