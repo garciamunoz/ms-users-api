@@ -12,7 +12,7 @@ public class Telefono implements Serializable {
 
     private static final long serialVersionUID = -2258003785279670633L;
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     @Column(name = "phonecountrycode")

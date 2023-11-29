@@ -9,11 +9,11 @@ import java.io.Serializable;
 public class Phone implements Serializable {
 
     private static final long serialVersionUID = 3781149809264727862L;
-    @JsonProperty("number")
+    @JsonProperty(value = "number",required = true)
     private String number;
-    @JsonProperty("citycode")
+    @JsonProperty(value = "citycode",required = true)
     private String cityCode;
-    @JsonProperty("contrycode")
+    @JsonProperty(value = "contrycode",required = true)
     private String countryCode;
 
 }

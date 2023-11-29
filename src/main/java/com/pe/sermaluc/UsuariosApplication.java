@@ -26,7 +26,7 @@ public class UsuariosApplication {
             http.csrf().disable()
                     .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                     .authorizeRequests()
-                    .antMatchers(HttpMethod.POST, "/user").permitAll()
+                    .antMatchers(HttpMethod.POST, "/create-user").permitAll()
                     .anyRequest().authenticated();
         }
     }

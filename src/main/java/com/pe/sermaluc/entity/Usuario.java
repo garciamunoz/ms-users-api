@@ -13,7 +13,7 @@ public class Usuario implements Serializable {
     private static final long serialVersionUID = -2659530227289055796L;
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     @Column(name = "username")
@@ -29,7 +29,9 @@ public class Usuario implements Serializable {
     @Column(name = "token")
     private String token;
     @Column(name = "isactive")
-    private String active;
+    private boolean active;
+    @Column(name = "pwd")
+    private String pwd;
     @OneToMany(mappedBy="user")
     private List<Telefono> phones;
 

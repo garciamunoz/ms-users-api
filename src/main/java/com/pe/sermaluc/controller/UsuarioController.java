@@ -1,7 +1,9 @@
 package com.pe.sermaluc.controller;
 
 import com.fasterxml.jackson.databind.annotation.JsonAppend;
+import com.pe.sermaluc.business.UsuarioService;
 import com.pe.sermaluc.dto.UsuarioDTO;
+import com.pe.sermaluc.model.User;
 import com.pe.sermaluc.util.PropertiesPlace;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -9,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -23,13 +22,16 @@ public class UsuarioController {
 
     @Autowired
     Environment env;
+    @Autowired
+    UsuarioService usuarioService;
 
-    @PostMapping("user")
-    public UsuarioDTO login(@RequestParam("user") String username, @RequestParam("password") String pwd) {
+    @PostMapping("create-user")
+    public UsuarioDTO createUser(@RequestBody User usuario) {
 
-        String token = getJWTToken(username);
+        String token = getJWTToken(usuario.getName());
+        usuarioService.registrarUsuario(token,usuario);
         UsuarioDTO user = new UsuarioDTO();
-        user.setCreated(username);
+        //8user.setCreated(username);
         user.setToken(token);
         return user;
 
