@@ -10,11 +10,11 @@ import java.util.List;
 public class User implements Serializable {
     private static final long serialVersionUID = 8044222617130059163L;
 
-    @JsonProperty("name")
+    @JsonProperty(value = "name" ,required = true)
     private String name;
-    @JsonProperty("email")
+    @JsonProperty(value = "email", required = true)
     private String email;
-    @JsonProperty("password")
+    @JsonProperty(value = "password", required = true)
     private String password;
     @JsonProperty("phones")
     private List<Phone> listPhones;

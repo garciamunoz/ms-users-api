@@ -9,6 +9,6 @@ public interface UsuarioService {
 
 
     public UsuarioDTO registrarUsuario(String token, User user);
-    
+
 
 }
