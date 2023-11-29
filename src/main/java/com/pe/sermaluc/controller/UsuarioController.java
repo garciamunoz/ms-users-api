@@ -1,6 +1,6 @@
 package com.pe.sermaluc.controller;
 
-import com.google.gson.Gson;
+
 import com.pe.sermaluc.business.UsuarioService;
 import com.pe.sermaluc.dto.UsuarioDTO;
 import com.pe.sermaluc.model.User;

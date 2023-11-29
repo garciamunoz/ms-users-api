@@ -2,24 +2,40 @@ package com.pe.sermaluc.business;
 
 import com.pe.sermaluc.entity.Telefono;
 import com.pe.sermaluc.entity.Usuario;
+import com.pe.sermaluc.exception.AlreadyRegisteredEmailException;
+import com.pe.sermaluc.exception.IncorrectMailFormatException;
 import com.pe.sermaluc.model.Phone;
 import com.pe.sermaluc.model.User;
 import com.pe.sermaluc.dao.UsuarioDAO;
 import com.pe.sermaluc.dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class UsuarioServiceImpl implements  UsuarioService{
 
     @Autowired
     UsuarioDAO usuarioDao;
+    @Autowired
+    private Environment env;
+
 
     public UsuarioDTO registrarUsuario(String token, User user) {
+
+        if(!user.getEmail().matches(env.getProperty("sermaluc.prueba.format.email"))){
+            throw new IncorrectMailFormatException("Formato de correo incorrecto");
+        }
+        List<Usuario> testList = usuarioDao.buscarPorEmail(user.getEmail());
+        if(testList!=null && !testList.isEmpty()){
+            throw new AlreadyRegisteredEmailException("El correo ya registrado");
+        }
         Usuario usuarioBD = new Usuario();
         usuarioBD.setActive(true);
         usuarioBD.setEmail(user.getEmail());
